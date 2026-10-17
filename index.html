@@ -126,6 +126,46 @@ table{max-width:100%}
 @media(min-width:641px) and (max-width:1024px){
   .stats-grid,.stat-grid,.card-grid,.grid,.dashboard-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
+  /* BRAMASTER161 - Tampilan khusus HP */
+@media screen and (max-width: 600px) {
+  html {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  img,
+  video,
+  canvas,
+  iframe {
+    max-width: 100%;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  table {
+    max-width: 100%;
+  }
+}
 </style>
 
 <style id="separate-feature-pages">
