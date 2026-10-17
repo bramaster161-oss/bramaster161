@@ -225,14 +225,88 @@ table{max-width:100%}
 <style id="separate-feature-pages">
 .feature-view{display:none;animation:featureIn .22s ease both;min-width:0}.feature-view.active{display:block}.feature-view .panel{margin:0 0 18px}.feature-view .content-grid,.feature-view .bottom-grid{display:block}.feature-view .side-stack{display:grid;grid-template-columns:1fr;gap:18px}.feature-view .results-list{overflow-x:auto}.feature-view .panel-head{align-items:flex-start}.feature-view .feature-intro{padding:20px 22px;margin-bottom:18px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(130deg,rgba(43,21,73,.7),rgba(15,10,25,.9))}.feature-view .feature-intro h2{margin:0 0 7px;font:700 22px 'Space Grotesk',sans-serif}.feature-view .feature-intro p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}@keyframes featureIn{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}@media(max-width:700px){.feature-view .feature-intro{padding:16px}.feature-view .feature-intro h2{font-size:19px}.feature-view .panel-head{padding:15px}}
 </style>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  // Isi dengan Project URL dan Publishable key milik Anda
-  const SB_URL = "https://bramaster161-oss.github.io/bramaster161/";
-  const SB_KEY = "sb_publishable_2znhDlqnPIRqwkI2xaKPpA_84_0SnUD";
+<style id="mobile-first-fixes">
 
-  const sb = window.supabase.createClient(SB_URL, SB_KEY);
-</script>
+/* PATCH PERBAIKAN: fokus HP, mencegah sidebar tampil permanen dan layout melebar */
+html,body{max-width:100%;overflow-x:hidden}
+img,svg,video,canvas{max-width:100%;height:auto}
+input,select,textarea,button{max-width:100%;touch-action:manipulation}
+.app,main,.feature-view,.panel,.panel-head,.results-list,.admin-tools{min-width:0;max-width:100%}
+@media(max-width:760px){
+  .app{display:block!important;min-height:100dvh}
+  .sidebar{position:fixed!important;top:0!important;bottom:0!important;left:0!important;width:min(82vw,290px)!important;height:100dvh!important;max-width:290px!important;z-index:1000!important;overflow-y:auto!important;transform:translateX(-110%);transition:transform .22s ease!important;box-shadow:var(--shadow);padding:18px 12px!important}
+  .sidebar.open{transform:translateX(0)!important;left:0!important}
+  .mobile-menu{display:inline-grid!important;flex:0 0 40px;width:40px;height:40px;place-items:center;border:1px solid var(--line);border-radius:12px;background:#151024;color:#f8f6ff}
+  main{width:100%!important;max-width:100%!important;padding:12px 12px calc(24px + env(safe-area-inset-bottom))!important;margin:0!important}
+  .topbar{display:flex;gap:8px;margin-bottom:16px;align-items:center;min-width:0}
+  .crumb{font-size:11px;min-width:0;overflow-wrap:anywhere}
+  .top-actions{gap:6px;min-width:0}
+  .mode-switch{padding:8px;font-size:10px}
+  .page-head{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:14px}
+  .page-head h1{font-size:clamp(23px,7vw,30px)!important;letter-spacing:-.6px}
+  .page-head p{font-size:12px;line-height:1.5}
+  .hero{display:block!important;min-height:0!important;padding:18px 16px!important;border-radius:17px!important}
+  .hero h2{font-size:24px!important;max-width:100%;margin:12px 0 8px}
+  .hero p{font-size:12px;max-width:100%;margin-bottom:14px}
+  .hero-art{display:none!important}
+  .btn-primary,.btn-ghost,.btn-secondary{min-height:42px;padding:10px 12px;font-size:12px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin:12px 0 16px!important}
+  .stat{padding:12px!important;border-radius:13px!important}
+  .stat-top{font-size:10px;align-items:flex-start}
+  .stat-icon{width:27px;height:27px;flex-shrink:0}
+  .stat-value{font-size:21px!important;margin:9px 0 5px!important;overflow-wrap:anywhere}
+  .stat-foot{font-size:9px;line-height:1.4}
+  .content-grid,.bottom-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;margin-top:12px!important}
+  .side-stack{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+  .panel{border-radius:14px!important}
+  .panel-head{padding:13px!important;gap:8px}
+  .panel-title{font-size:13px;min-width:0}
+  .panel-sub{line-height:1.45}
+  .results-list{padding:0 12px!important;overflow:visible!important}
+  .result-row{grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;padding:12px 0!important}
+  .market-logo{width:32px;height:32px;border-radius:10px}
+  .market-name{font-size:11px;max-width:45vw}
+  .market-time{font-size:9px;overflow-wrap:anywhere}
+  .result-number{font-size:18px!important;letter-spacing:2px!important}
+  .result-status{display:none!important}
+  .schedule-list,.activity{padding-left:12px!important;padding-right:12px!important}
+  .market-cards{grid-template-columns:minmax(0,1fr)!important;padding:12px!important;gap:9px!important}
+  .market-card{padding:12px!important}
+  .mc-number{font-size:21px;margin:12px 0 8px}
+  .admin-tools{padding:13px!important}
+  .field{gap:6px;margin-bottom:10px}
+  .field input,.field select,.login-card .field input,.login-card .field select{font-size:16px!important;min-height:44px;padding:11px!important}
+  .form-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .form-actions>*{width:100%;margin:0!important}
+  .feature-view .feature-intro{padding:14px!important;margin-bottom:12px!important}
+  .feature-view .feature-intro h2{font-size:19px!important}
+  .feature-view .panel{margin-bottom:12px!important}
+  .admin-result-item{gap:8px;flex-wrap:wrap}
+  .admin-result-name,.admin-result-number{overflow-wrap:anywhere}
+  .footer{font-size:9px;line-height:1.5;gap:7px;margin-top:16px;padding-top:12px}
+  .toast{left:12px!important;right:12px!important;bottom:calc(12px + env(safe-area-inset-bottom))!important;text-align:center}
+  #loginGate{align-items:flex-start!important;justify-content:center!important;overflow-y:auto!important;padding:14px!important;min-height:100dvh!important}
+  #loginGate .login-card{margin:auto!important;width:100%!important;max-width:460px!important;padding:20px!important;border-radius:18px!important}
+  #loginResultsList{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+@media(max-width:360px){main{padding-left:9px!important;padding-right:9px!important}.stats{gap:6px!important}.stat{padding:9px!important}.stat-value{font-size:19px!important}.hero{padding:15px!important}.hero h2{font-size:21px!important}.login-brand{gap:9px}.login-title{font-size:15px}}
+
+</style>
+<style>
+/* Perbaikan logo pada tampilan HP: logo tetap terlihat saat sidebar tertutup */
+.mobile-brand{display:none}
+@media(max-width:760px){
+  .topbar{position:relative;z-index:5}
+  .mobile-brand{display:flex!important;align-items:center;gap:7px;min-width:0;flex:1;overflow:hidden}
+  .mobile-brand .brand-mark{width:32px!important;height:32px!important;min-width:32px;border-radius:10px!important;box-shadow:0 0 14px rgba(168,85,247,.35)!important}
+  .mobile-brand .brand-mark img{width:100%!important;height:100%!important;object-fit:contain!important;display:block}
+  .mobile-brand .brand-name{font-size:11px!important;letter-spacing:.5px!important;white-space:nowrap}
+  .mobile-brand .brand-sub{font-size:7px!important;letter-spacing:1.3px!important;white-space:nowrap}
+  .top-actions{margin-left:auto;flex:0 0 auto}
+  #modeBtn{display:none!important}
+}
+</style>
 </head>
 <body>
 
@@ -481,6 +555,18 @@ function copyDepositNumber(value){if(navigator.clipboard&&navigator.clipboard.wr
  // Update admin schedule content whenever the app rerenders.
  const oldRenderAll=window.renderAll; if(typeof oldRenderAll==='function'){window.renderAll=function(){oldRenderAll();const list=document.getElementById('adminScheduleList');if(list)list.innerHTML=(window.schedules||[]).map(x=>'<div class="schedule-item"><div class="schedule-icon">'+x.icon+'</div><div class="schedule-copy"><strong>'+x.market+'</strong><span>'+x.desc+'</span></div><div class="schedule-time">'+x.time+'</div></div>').join('');renderAdminUsers();renderDepositAccounts();renderUserDeposits();renderDepositRequests();renderPlayBets();const wb=document.getElementById('userWalletBalance');if(wb)wb.textContent=money(currentUser&&window.neonLoginRole==='user'?(Number(currentUser.balance)||0):0)}}
  const originalEnterApp=window.enterApp;window.enterApp=function(role,user){if(user&&role==='user'){const saved=getLocalUsers().find(x=>x.username===user.username);if(saved)user=saved}originalEnterApp(role,user);const wb=document.getElementById('userWalletBalance');if(wb)wb.textContent=money(role==='user'&&user?(Number(user.balance)||0):0);renderDepositRequests();renderPlayBets();};
+
+ // Salin logo ke header HP agar tetap tampak saat menu samping ditutup.
+ const sideBrand=document.querySelector('#sidebar .brand');
+ const topbar=document.querySelector('#app .topbar');
+ const menuButton=topbar&&topbar.querySelector('.mobile-menu');
+ if(sideBrand&&topbar&&menuButton&&!topbar.querySelector('.mobile-brand')){
+   const mobileBrand=sideBrand.cloneNode(true);
+   mobileBrand.classList.add('mobile-brand');
+   mobileBrand.setAttribute('aria-label','Logo BRAMASTER161');
+   menuButton.insertAdjacentElement('afterend',mobileBrand);
+ }
+
  window.goPage('overview');
  window.renderAdminUsers=renderAdminUsers; window.renderDepositAccounts=renderDepositAccounts; window.renderUserDeposits=renderUserDeposits; renderAdminUsers(); renderDepositAccounts(); renderUserDeposits(); renderDepositRequests(); renderPlayBets();
 })();
